@@ -11,7 +11,11 @@ extern crate xblockchain;
 extern crate xblockchain_storage;
 extern crate exe_common;
 
+extern crate xchain;
+
 use std::path::{PathBuf};
+
+use xchain::gclock;
 
 pub struct State {
 }
@@ -30,5 +34,31 @@ fn main() {
 
     /// connect to peers
     /// core logic
+
+    // setup_network
+    // events:
+    //  new connection:
+    //    poll:
+    //      recv_transaction:
+    //         check_transaction_valid
+    //         add transaction to pool
+    //      recv_block:
+    //         check block valid
+    //         try to extend blockchain with block
+    //         update utxo state
+    //         flush transaction pool if any txid made it
+    //      get block(s):
+    //         try to answer
+    //
+    // periodically protocol speed:
+    //   check elected
+    //   if elected
+    //     take set of transactions from pool
+    //     create a block
+    //     send it async to peers
+    //
+    // periodically cleanup:
+    //   storage cleanup/packing
+
     println!("Hello, world!");
 }
