@@ -5,6 +5,7 @@ use xblockchain_storage::Storage;
 pub struct BlockchainFork {
 }
 
+#[allow(dead_code)]
 pub struct Blockchain {
     /// the storage for the overall blockchains (blocks)
     storage: Storage,
