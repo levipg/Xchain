@@ -22,7 +22,7 @@ use xchain::{gclock, state};
 use xchain::state::State;
 use xchain::tpool::{TPool};
 use xchain::blockchain::{Blockchain};
-use xchain::utils::{task_create, task_create_with_inputs, Task};
+use xchain::utils::task::{task_create, task_create_with_inputs, Task};
 
 use std::sync::{Arc, RwLock, mpsc::Receiver};
 use std::{time, thread};
@@ -157,8 +157,8 @@ fn main() {
 
     let leadership = {
         let tpool = Arc::clone(&tpool);
-        task_create("leadership", move || leadership_task(&tpool));
-    }
+        task_create("leadership", move || leadership_task(tpool));
+    };
 
     // periodically cleanup (custom):
     //   storage cleanup/packing
