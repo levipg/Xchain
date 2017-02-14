@@ -26,6 +26,7 @@ cbor_event = "1.0"
 cryptoxide = "0.1"
 futures    = "^0.1.25"
 tokio      = "^0.1.11"
+structopt = "^0.2.12"
 xblockchain         = { path = "xblockchain-deps/xblockchain" }
 protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
 exe-common      = { path = "xblockchain-deps/exe-common" }
