@@ -18,12 +18,13 @@ extern crate xchain;
 
 use std::path::{PathBuf};
 
-use xchain::{gclock, state};
+use xchain::{clock, state};
 use xchain::state::State;
 use xchain::tpool::{TPool};
 use xchain::blockchain::{Blockchain};
 use xchain::utils::task::{task_create, task_create_with_inputs, Task, TaskMessageBox};
 use xchain::command_arguments::{CommandArguments, StructOpt};
+use xchain::intercom::{BlockMsg, ClientMsg, TransactionMsg};
 
 use std::sync::{Arc, RwLock, mpsc::Receiver};
 use std::{time, thread};
@@ -36,21 +37,21 @@ pub type TODO = u32;
 pub type BlockchainR = Arc<RwLock<Blockchain>>;
 pub type TPoolR = Arc<RwLock<TPool<TxId, TxAux>>>;
 
-fn transaction_task(_tpool: TPoolR, r: Receiver<TODO>) {
+fn transaction_task(_tpool: TPoolR, r: Receiver<TransactionMsg>) {
     loop {
         let tquery = r.recv().unwrap();
         println!("transaction received: {}", tquery)
     }
 }
 
-fn block_task(_blockchain: BlockchainR, r: Receiver<TODO>) {
+fn block_task(_blockchain: BlockchainR, r: Receiver<BlockMsg>) {
     loop {
         let tquery = r.recv().unwrap();
         println!("transaction received: {}", tquery)
     }
 }
 
-fn client_task(_blockchain: BlockchainR, r: Receiver<TODO>) {
+fn client_task(_blockchain: BlockchainR, r: Receiver<ClientMsg>) {
     loop {
         let query = r.recv().unwrap();
         println!("client query received: {}", query)
