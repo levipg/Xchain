@@ -18,12 +18,12 @@ extern crate xchain;
 
 use std::path::{PathBuf};
 
-use xchain::{clock, state};
+use xchain::{clock, state, blockchain};
 use xchain::state::State;
 use xchain::tpool::{TPool};
-use xchain::blockchain::{Blockchain};
+use xchain::blockchain::{Blockchain, BlockchainR};
 use xchain::utils::task::{task_create, task_create_with_inputs, Task, TaskMessageBox};
-use xchain::command_arguments::{CommandArguments, StructOpt};
+use xchain::settings::command_arguments::{CommandArguments};
 use xchain::intercom::{BlockMsg, ClientMsg, TransactionMsg};
 
 use std::sync::{Arc, RwLock, mpsc::Receiver};
@@ -34,7 +34,6 @@ use xblockchain::tx::{TxId, TxAux};
 use xblockchain_storage::StorageConfig;
 
 pub type TODO = u32;
-pub type BlockchainR = Arc<RwLock<Blockchain>>;
 pub type TPoolR = Arc<RwLock<TPool<TxId, TxAux>>>;
 
 fn transaction_task(_tpool: TPoolR, r: Receiver<TransactionMsg>) {
@@ -44,10 +43,10 @@ fn transaction_task(_tpool: TPoolR, r: Receiver<TransactionMsg>) {
     }
 }
 
-fn block_task(_blockchain: BlockchainR, r: Receiver<BlockMsg>) {
+fn block_task(blockchain: BlockchainR, r: Receiver<BlockMsg>) {
     loop {
-        let tquery = r.recv().unwrap();
-        println!("transaction received: {}", tquery)
+        let bquery = r.recv().unwrap();
+        blockchain::process(&blockchain, bquery);
     }
 }
 
@@ -137,7 +136,7 @@ fn main() {
     //
     // parse the command line arguments, the config files supplied
     // and setup the initial values
-    let command_arguments = CommandArguments::from_args();
+    let command_arguments = CommandArguments::load();
 
     // setup the logging level
     let log_level = match command_arguments.verbose {
