@@ -6,6 +6,8 @@ extern crate serde_yaml;
 #[macro_use]
 extern crate log;
 extern crate env_logger;
+#[macro_use]
+extern crate structopt;
 
 extern crate xblockchain;
 extern crate xblockchain_storage;
@@ -14,17 +16,23 @@ extern crate protocol_tokio as protocol;
 extern crate futures;
 extern crate tokio;
 
-extern crate xchain;
+pub mod clock;
+pub mod blockchain;
+pub mod tpool;
+pub mod state;
+pub mod network;
+pub mod utils;
+pub mod intercom;
+pub mod settings;
 
 use std::path::{PathBuf};
 
-use xchain::{clock, state, blockchain};
-use xchain::{settings::Settings};
-use xchain::state::State;
-use xchain::tpool::{TPool};
-use xchain::blockchain::{Blockchain, BlockchainR};
-use xchain::utils::task::{task_create, task_create_with_inputs, Task, TaskMessageBox};
-use xchain::intercom::{BlockMsg, ClientMsg, TransactionMsg};
+use settings::Settings;
+use state::State;
+use tpool::{TPool};
+use blockchain::{Blockchain, BlockchainR};
+use utils::task::{task_create, task_create_with_inputs, Task, TaskMessageBox};
+use intercom::{BlockMsg, ClientMsg, TransactionMsg};
 
 use std::sync::{Arc, RwLock, mpsc::Receiver};
 use std::{time, thread};
