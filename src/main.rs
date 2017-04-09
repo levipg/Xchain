@@ -18,34 +18,32 @@ extern crate tokio;
 
 pub mod clock;
 pub mod blockchain;
-pub mod transaction;
+pub mod tpool;
 pub mod state;
 pub mod network;
 pub mod utils;
 pub mod intercom;
 pub mod settings;
-pub mod blockcfg;
 
 use std::path::{PathBuf};
 
 use settings::Settings;
 use state::State;
-use transaction::{TPool};
+use tpool::{TPool};
 use blockchain::{Blockchain, BlockchainR};
 use utils::task::{task_create, task_create_with_inputs, Task, TaskMessageBox};
 use intercom::{BlockMsg, ClientMsg, TransactionMsg};
 
-use blockcfg::*;
-
 use std::sync::{Arc, RwLock, mpsc::Receiver};
 use std::{time, thread};
+use std::net::SocketAddr;
 
+use xblockchain::config::GenesisData;
 use xblockchain::tx::{TxId, TxAux};
-
 use xblockchain_storage::StorageConfig;
 
 pub type TODO = u32;
-pub type TPoolR = Arc<RwLock<TPool<TransactionId, Transaction>>>;
+pub type TPoolR = Arc<RwLock<TPool<TxId, TxAux>>>;
 
 fn transaction_task(_tpool: TPoolR, r: Receiver<TransactionMsg>) {
     loop {
@@ -54,7 +52,7 @@ fn transaction_task(_tpool: TPoolR, r: Receiver<TransactionMsg>) {
     }
 }
 
-fn block_task(blockchain: BlockchainR, clock: clock::Clock, r: Receiver<BlockMsg>) {
+fn block_task(blockchain: BlockchainR, r: Receiver<BlockMsg>) {
     loop {
         let bquery = r.recv().unwrap();
         blockchain::process(&blockchain, bquery);
@@ -68,7 +66,7 @@ fn client_task(_blockchain: BlockchainR, r: Receiver<ClientMsg>) {
     }
 }
 
-fn leadership_task(tpool: TPoolR, clock: clock::Clock) {
+fn leadership_task(tpool: TPoolR) {
     // FIXME this is handled in thread, but the event will come from the clock on new slot event
     let sleep_time = time::Duration::from_secs(20);
     loop {
@@ -87,7 +85,7 @@ fn leadership_task(tpool: TPoolR, clock: clock::Clock) {
 }
 
 fn info(gd: &GenesisData) {
-    println!("protocol magic={} prev={} k={}", gd.protocol_magic, gd.genesis_prev, gd.epoch_stability_depth);
+    println!("protocol magic={} prev={}", gd.protocol_magic, gd.genesis_prev);
 }
 
 fn main() {
@@ -104,15 +102,6 @@ fn main() {
     let genesis_data = settings.read_genesis_data();
 
     info(&genesis_data);
-
-    let clock = {
-        let initial_epoch = clock::ClockEpochConfiguration {
-            slot_duration: genesis_data.slot_duration,
-            slots_per_epoch: genesis_data.epoch_stability_depth * 10,
-        };
-        let config = clock::ClockConfiguration::new(initial_epoch);
-        clock::Clock::new(config)
-    };
 
     let mut state = State::new();
 
@@ -162,8 +151,7 @@ fn main() {
 
     let block_task = {
         let blockchain = Arc::clone(&blockchain);
-        let clock = clock.clone();
-        task_create_with_inputs("block", move |r| block_task(blockchain, clock, r))
+        task_create_with_inputs("block", move |r| block_task(blockchain, r))
     };
 
     let client_task = {
@@ -201,8 +189,7 @@ fn main() {
 
     let leadership = {
         let tpool = Arc::clone(&tpool);
-        let clock = clock.clone();
-        task_create("leadership", move || leadership_task(tpool, clock));
+        task_create("leadership", move || leadership_task(tpool));
     };
 
     // periodically cleanup (custom):

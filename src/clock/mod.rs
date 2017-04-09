@@ -4,9 +4,7 @@ pub mod global;
 use std::thread;
 use std::time::Duration;
 use std::sync::{Arc, RwLock};
-use self::configuration::{Epoch};
-
-pub use self::configuration::{ClockEpochConfiguration, ClockConfiguration};
+use self::configuration::{ClockEpochConfiguration, ClockConfiguration, Epoch};
 
 #[derive(Clone)]
 pub struct Current {
@@ -31,7 +29,6 @@ impl Current {
     }
 }
 
-#[derive(Clone)]
 pub struct Clock {
     configuration: Arc<ClockConfiguration>,
     current_slot: Arc<RwLock<Current>>,
