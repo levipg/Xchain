@@ -39,7 +39,8 @@ use blockcfg::*;
 
 use std::sync::{Arc, RwLock, mpsc::Receiver};
 use std::{time, thread};
-use std::net::SocketAddr;
+
+use xblockchain::tx::{TxId, TxAux};
 
 use xblockchain_storage::StorageConfig;
 
