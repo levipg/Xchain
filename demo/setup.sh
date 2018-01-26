@@ -22,7 +22,7 @@ genesis=${3:-0}
 config=${4:-'demo-config.yaml'}
 
 # xblockchain-cli - location of xblockchain-cli 
-cli=${5:-"$HOME/iohk/code/xblockchain-cli/target/debug/xblockchain-cli"}
+cli=${5:-"xblockchain-cli"}
 
 
 echo "Using these options:"
