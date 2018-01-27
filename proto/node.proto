@@ -74,7 +74,7 @@ service Node {
     rpc GetHeaders (GetBlocksRequest) returns (stream xblockchain.Header) {
         option idempotency_level = NO_SIDE_EFFECTS;
     }
-    rpc StreamBlocksToTop (xblockchain.HeaderHashes) returns (stream xblockchain.Block);
+    rpc StreamBlocksToTip (xblockchain.HeaderHashes) returns (stream xblockchain.Block);
     rpc ProposeTransactions (ProposeTransactionsRequest) returns (ProposeTransactionsResponse);
     rpc RecordTransaction (RecordTransactionRequest) returns (RecordTransactionResponse);
 }
