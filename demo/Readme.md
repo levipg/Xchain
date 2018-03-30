@@ -11,10 +11,9 @@ This code will allow you to setup a demo instance of jormnugndr with a configura
 
 First you need to create the environment to run xchain
 
-`./setup.sh <folder> <nodecount> <genesis-file> <xblockchain-cli-path> <config.yaml> `
+`./setup.sh <folder> <nodecount> <genesis-file> <xblockchain-cli-path> `
 
-This will create the required environment in a folder, you only need to specify
-the first 3 most of the time.
+This will create the required environment in a folder. 
 
 ## Running 
 
@@ -24,10 +23,10 @@ once the folder is generated you can use the tools within it to start the nodes
 
 `cd $folder/bin`
 
-`./start_nodes.sh <min> <max>`
+`./start_nodes.sh`
 
-This will start the configured amount of nodes in individual screen sessions.
-You can specify no parameters to start them all or a min and max to start all nodes in a range. 
+
+This will start the configured amount of nodes in individual screen sessions
 
 ### Stopping nodes
 
@@ -35,10 +34,7 @@ You can stop the nodes manually or with this script
 
 `cd $folder/bin`
 
-`./stop_nodes.sh <min> <max>`
-
-This will stop the configured amount of nodes in individual screen sessions.
-You can specify no parameters to stop them all or a min and max to stop all nodes in a range.
+`./stop_nodes`
 
 
 ### Node Status
@@ -47,9 +43,8 @@ You can see available nodes by running
 
 `cd $folder/bin`
 
-`./list_nodes.sh`
+`./list_nodes`
 
-This will show you a list of running nodes and their status.
 
 ## Advanced
 
