@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 #/bin/bash -e
 
 # Jormaungandr setup tool - Amias Channer
@@ -6,12 +5,8 @@
 # Generates a folder with a specified amount of interoperating xchain nodes
 #
 echo
-echo "Xchain - Setup generator"
+echo "Jormunandr - Setup generator"
 echo
-
-clipath=$(which xblockchain-cli)
-
-echo "cli found at $clipath"
 
 # params
 # folder - folder to prepare for a demo
@@ -23,19 +18,19 @@ nodes=${2:-0}
 # genesis - genesis data for nodes to use
 genesis=${3:-0}
 
-# xblockchain-cli - location of xblockchain-cli 
-cli=${4:-$clipath}
-
 # config - template for config
-config=${5:-'demo-config.yaml'}
+config=${4:-'demo-config.yaml'}
+
+# xblockchain-cli - location of xblockchain-cli 
+cli=${5:-"xblockchain-cli"}
 
 
 echo "Using these options:"
 echo "  Folder: $folder"
 echo "  Nodes: $nodes"
 echo "  Genesis: $genesis"
-echo "  CLI: $cli"
 echo "  Config: $config"
+echo "  CLI: $cli"
 echo
 
 if [ ! $folder ]; then
@@ -63,23 +58,13 @@ else
   exit
 fi
 
-if [ $cli ]; then
-  if [ ! -e $cli ]; then
-    echo "Error: could not read xblockchain-cli at $cli"
-    exit
-  fi
-else
-  echo "Error: Please supply a xblockchain-cli executable as the fourth parameter"
-  exit
-fi
-
 # we have all the info we need at this point
 
 echo "Building Xchain"
 echo
-# cd ..
-# cargo build
-# cd demo  
+cd ..
+cargo build
+cd tools  
 echo
 echo "Build finished"
 echo
@@ -91,18 +76,17 @@ cp -rv template/* $folder/
 echo
 
 echo "Copying in binaries"
-cp $cli $folder/bin/xblockchain-cli
+cp $cli $folder/bin/
 cp ../target/debug/xchain $folder/bin/
 echo
 
+echo "Copying in genesis"
+cp $genesis $folder/genesis.json
+echo
 
 echo "Making Configs for $nodes nodes"
 counter=0
 cp $config $folder'/config.yaml'
-
-keys_for_genesis=''
-
-pushd .
 
 while [ $counter -lt $nodes ]; do
     
@@ -110,38 +94,24 @@ while [ $counter -lt $nodes ]; do
     mkdir -p $node_folder
     cd $node_folder
     
-    let counter=$counter+1			
+		let counter=$counter+1			
 		
-    stub='node_'$counter
-    privkey=$node_folder/$stub'.xprv' 
-    pubkey=$node_folder/$stub'.xpub'
+		stub='node_'$counter
+		privkey=$node_folder/$stub'.xprv'
+		pubkey=$node_folder/$stub'.xpub'
 
-    echo "Making keys for $stub"
-    echo "PRIV = $privkey"
+		echo "Making keys for $stub"
+		echo "PRIV = $privkey"
     echo "PUB  = $pubkey"
 
-    ../../bin/xblockchain-cli debug generate-xprv $privkey
-    ../../bin/xblockchain-cli debug xprv-to-xpub $privkey $pubkey
+    $cli debug generate-xprv $privkey
+    $cli debug xprv-to-xpub $privkey $pubkey
 
-    echo "Adding key to global config"
-    pubkeycontents=`cat $pubkey` 
-    echo "    - $pubkeycontents" >> $folder'/config.yaml'
-    echo  
-    
-    # put the private key
-    privkeycontents=`cat $privkey`
-    keys_for_genesis+='"'$privkeycontents'":1,'
+		echo "Adding key to global config"
+		pubkeycontents=`cat $pubkey` 
+		echo "    - $pubkeycontents" >> $folder'/config.yaml'
+		echo
 done  
-
-
-popd
-
-# remove trailing comma from list of keys
-trimmed_keys=${keys_for_genesis::-1}
-
-echo "Copying in genesis and patching in keys"
-cat $genesis  | jq -r '.bootStakeholders |= {'$trimmed_keys'}' > $folder/genesis.json
-echo
 
 echo "Setup is complete"
 echo 
