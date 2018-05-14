@@ -13,7 +13,8 @@ Currently the minimum supported version of the rust compiler is 1.35, however we
 3. run `rustup default stable`
 4. clone this repository: `git clone https://github.com/youtubaijia/xchain`
 5. make sure you have cloned the submodule too: `git submodule update --init --recursive`
-6. install: `cargo install --path .`
+6. install **xchain**: `cargo install --path xchain`
+6. install **jcli**: `cargo install --path jcli`
 
 Note:
 
