@@ -18,8 +18,8 @@ main() {
     test -f Cargo.lock || cargo generate-lockfile
 
     # TODO Update this to build the artifacts that matter to you
-    cross rustc --bin xchain --target $TARGET --release -- -C lto
-    cross rustc --bin jcli        --target $TARGET --release -- -C lto
+    cross rustc -p xchain --target $TARGET --release -- -C lto
+    cross rustc -p jcli        --target $TARGET --release -- -C lto
 
     cp target/$TARGET/release/xchain $stage/
     cp target/$TARGET/release/jcli $stage/
