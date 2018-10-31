@@ -1,13 +1,9 @@
 [workspace]
 members = [
-  "hex",
   "xchain-utils",
-  "xchain-lib",
   "xchain",
   "jcli",
   "xchain-integration-tests",
 ]
 
-exclude = [
-    "chain-deps",
-]
+exclude = [ "xblockchain-deps" ]
