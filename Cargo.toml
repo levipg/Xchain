@@ -20,6 +20,7 @@ dirs = "1.0"
 rand = "0.6"
 serde = "1.0"
 serde_derive = "1.0"
+serde_json = "1.0.38"
 serde_yaml = "0.8"
 slog = "^2.4"
 slog-async = "2.3.0"
@@ -37,14 +38,14 @@ sha2 = "^0.7"
 digest = "^0.7"
 generic-array = "^0.9"
 bytes = "0.4"
-prost = "0.4"
 lazy_static = "1.2.0"
-prost-derive = "0.4"
+actix-net = "0.2.6"
+native-tls = "0.2.2"
 tokio-connect = { git = "https://github.com/carllerche/tokio-connect" }
-tower-h2 = { git = "https://github.com/tower-rs/tower-h2" }
-tower-util = { git = "https://github.com/tower-rs/tower" }
 chain-core      = { path = "xblockchain-deps/chain-core" }
+chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain" }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
+chain-addr      = { path = "xblockchain-deps/chain-addr" }
 network-core    = { path = "xblockchain-deps/network-core" }
 network-grpc    = { path = "xblockchain-deps/network-grpc" }
 xblockchain         = { path = "xblockchain-deps/xblockchain" }
@@ -53,18 +54,14 @@ exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
 storage-units   = { path = "xblockchain-deps/storage-units" }
 
+[dependencies.actix-web]
+version = "0.7.18"
+features = [ "tls" ]
+
 [dependencies.clap]
 version = "2.32"
 default-features = false
 features = [ "suggestions", "color", "wrap_help" ]
-
-[dependencies.tower-grpc]
-git = "https://github.com/tower-rs/tower-grpc"
-rev = "7ffa9d3b610d1c84559a811d08a25bd1670babed"
-
-[build-dependencies.tower-grpc-build]
-git = "https://github.com/tower-rs/tower-grpc"
-rev = "7ffa9d3b610d1c84559a811d08a25bd1670babed"
 
 [dev-dependencies]
 quickcheck = "0.8"
