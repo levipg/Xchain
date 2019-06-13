@@ -15,7 +15,7 @@ we recommend to use the most recent stable version of the rust compiler.
 4. Clone this repository: `git clone --recurse-submodules https://github.com/youtubaijia/xchain`
 5. Enter the repository directory: `cd xchain`
 6. install **xchain**: `cargo install --path xchain`
-6. install **jcli**: `cargo install --path jcli`
+7. install **jcli**: `cargo install --path jcli`
 
 Note:
 
