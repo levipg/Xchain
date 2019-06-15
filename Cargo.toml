@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "xchain-utils",
+  "xchain-lib",
   "xchain",
   "jcli",
   "xchain-integration-tests",
