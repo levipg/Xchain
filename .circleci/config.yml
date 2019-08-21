@@ -6,8 +6,6 @@ jobs:
     working_directory: /mnt/crate
     steps:
       - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
       - restore_cache:
           keys:
             - cargo-v2-{{ checksum "Cargo.toml" }}-
@@ -29,8 +27,6 @@ jobs:
     working_directory: /mnt/crate
     steps:
       - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
       - attach_workspace:
           at: "."
       - restore_cache:
@@ -61,8 +57,6 @@ jobs:
     working_directory: /mnt/crate
     steps:
       - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
       - attach_workspace:
           at: "."
       - restore_cache:
@@ -80,8 +74,6 @@ jobs:
     working_directory: /mnt/crate
     steps:
       - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
       - attach_workspace:
           at: "."
       - restore_cache:
