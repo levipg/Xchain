@@ -5,71 +5,48 @@
 ## Internal Design
 
 
-Glossary:
+glossary:
 
-* **blockchains**: the current blockchain and possibly different known forks.
-* **clock**: general time tracking to know the time in blockchain unit (epoch/slot)
-* **tip**: the current fork that is considered the correct one, related to consensus algorithm.
-
-## Tasks.
-
-Each node runs several tasks. Task is a process with a clearly defined interface
-that abstracts a particular task.
+* blockchains: the current blockchain and possibly different known forks.
+* clock: general time tracking to know the time in blockchain unit (epoch/slot)
+* tip: the current fork that is considered the correct one, related to consensus algorithm.
 
 General tasks:
 
-* **Network task**: handle new connections, and perform lowlevel queries.
-  It does queries parsing and routing them to the other tasks: block,
-  client or transaction tasks.
+* Network task: Handle new connections, and lowlevel queries. mostly parsing and routing them to
+  block, client or transaction tasks.
 
-* **Block task**: handles blocks reception from other nodes and the leadership
-  thread. The blocks can be external and internal. External block (...), and
-  internal block (...).
-  When the task receives an external block it validates the block. If validation
-  succeeds then the task appends blocks to the blockchain and checks if the tip
-  needs any changes.
-  When the task receives an internal block it does the same actions except for
-  block validation. And then broadcasts the change of the tip to the network
-  thread.
+* Block task: Handle all the blocks reception from nodes and leadership thread.
+  On reception of external blocks, validate the block, and on succesful validation
+  append to the blockchains, check if the blockchain tip need change. On internal block
+  reception, same except without need for validation, broadcast change of tip back to network thread
 
-* **Leadership task**: waits for each new slot, evaluates if this node is
-  a slot leader. In case if it is, the task creates a new block
-  (with a set of known transactions) referencing the latest known
-  and agreed block in the blockchain. Then the task sends it to the block
-  thread for processing.
+* Leadership task: Wait for each new slot, and evaluate whether or not this node is
+  a slot leader. If yes, then create a new block (with a set of known
+  transactions) referencing the latest known and agreed block in the blockchain,
+  then send it to the block thread for processing (appending to blockchain structure, then broadcasting)
 
-* **Client task**: receives block header/body queries. This task is in charge
-  of in accord [!!!] with the blockchains, reply to the client.
+* Client task: receive block header/body queries (e.g. Get Block 1 to 2000), and is in charge
+  of in accord with the blockchains, reply to the client.
 
-* **Transaction task**: receives new transactions from the network,
-  validates transaction and handle duplicates.
-  Also the broadcast to other nodes new (valid) transaction received.
+* Transaction task: receive new transaction from the network, validate transaction and handle duplicates.
+  Also broadcast to other nodes new (valid) transaction received.
 
 ![Internal Architecture](/.architecture-1.png?raw=true "Internal Architecture")
 
 
 ## How To Use
 
-In order to use xchain you need to configure your blockchain and
-configure your node.
-In order to configure a blockchain you should have a genesis file. If
-you want to create a new blockchain you can create a new genesis file.
-See 'create your genesis file' section.
-
-Then you need to configure your nodes, see 'node configuration section'.
-
-After configuring the blockchain and the node you can start one,
-see 'starting the node' section.
-
 ### Create your genesis file
 
-In order to do so you should create:
+if you don't have a genesis file yet but you want to create a new bkockchain
+you will need to create:
 
 * the genesis data : That is the data that will be used to initialise the
   protocol properties (like the initial UTxOs);
 * the protocol properties;
 
-Run following command to generate your `genesis.yaml` file:
+There is simple command you can run to generate your genesis.yaml file:
 
 ```
 xchain init \
@@ -94,13 +71,7 @@ initial_utxos:
 
 You store this in a genesis.yaml file, you can the modify/tune your genesis data.
 
-Configuration fields meaning:
-  - *start_time*: when the blockchain starts
-  - *slot_duration*: amount of time each slot is running.
-  - *epoch_stability_depth*: allowed size of the fork (in blocks).
-  - *initial_utuxos*:
-
-### Node Configuration
+## Node Configuration
 
 Example of node config:
 
@@ -119,39 +90,6 @@ logger:
   format: json
 ```
 
-Fields description:
-
-  - *bft.constants.t*: (to be removed)
-  - *bft.leaders*: public keys of the nodes.
-  - *grpc_listen*: (optional) addresses of the other
-      nodes that are connected using grpc protocol.
-  - *storage*: (optional) path to the storage
-  - *logger*: (optional) logger configuration,
-     - *verbosity*: 0 - warning, 1 - info, 2 -debug, 3 and above - trace
-     - *format*: log output format - plain or json.
-
-### Starting the node
-
-If you are not a leader node, then you can start the jormundandr with:
-
-```
-xchain start --genesis-config genesis.yaml \
-  --config example.config \
-  --without-leadersip
-```
-
-In order to start a leader node you need to generate key pairs using
-`xblockchain-cli`:
-
-```
-xblockchain-cli debug generate-xprv key.xprv
-xblockchain-cli debug xprv-to-xpub key.xprv key.xpub
-```
-
-Then you should start node using:
-
-```
-xchain start --genesis-config genesis.yaml \
-  --config example.config \
-  --secret key.xprv
-```
+`legacy_listen`, `grpc_listen`, `storage` and `logger` fields are optional and can be omitted.
+Verbosity levels are descripbed as an integer where 0 - warning, 1 - info, 3 - debug, 4 and above - trace.
+Format is one of "json" or "plain".
