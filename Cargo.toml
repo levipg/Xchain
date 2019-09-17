@@ -53,7 +53,6 @@ protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
 exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
 storage-units   = { path = "xblockchain-deps/storage-units" }
-tower-service = { git = "https://github.com/tower-rs/tower" }
 
 [dependencies.actix-web]
 version = "0.7.18"
