@@ -74,8 +74,8 @@ Run following command to generate your `genesis.yaml` file:
 ```
 xchain init \
     --initial-utxos=ca1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9ccrydpk8qarc0jqxuzx4s@999999999 \
-    --obft-leader=5b66c12d1aa6986d9c37b7bf905826a95db4b1c28e7c24fbaeb6ec277f75bd59 \
-    --obft-leader f976bd9025d8c26928479ebdd39c12ac2cf5ce73f6534648a78ddc0da2f57794
+    --bft-leader=5b66c12d1aa6986d9c37b7bf905826a95db4b1c28e7c24fbaeb6ec277f75bd59 \
+    --bft-leader=f976bd9025d8c26928479ebdd39c12ac2cf5ce73f6534648a78ddc0da2f57794 > genesis.yaml
 ```
 
 Running the command above will generate (WARNING: this is temporary, the genesis data format will be updated):
@@ -117,6 +117,10 @@ storage: "/tmp/storage"
 logger:
   verbosity: 1
   format: json
+rest:
+  listen: "127.0.0.1:8443"
+  pkcs12: "example.p12"
+  prefix: "api"
 ```
 
 Fields description:
@@ -129,6 +133,10 @@ Fields description:
   - *logger*: (optional) logger configuration,
      - *verbosity*: 0 - warning, 1 - info, 2 -debug, 3 and above - trace
      - *format*: log output format - plain or json.
+  - *rest*: (optional) configuration of the rest endpoint.
+     - *listen*: listen address
+     - *pkcs12*: certificate file
+     - *prefix*: (optional) api prefix
 
 ### Starting the node
 
@@ -137,16 +145,21 @@ If you are not a leader node, then you can start the jormundandr with:
 ```
 xchain start --genesis-config genesis.yaml \
   --config example.config \
-  --without-leadersip
+  --without-leadership
 ```
 
 In order to start a leader node you need to generate key pairs using
-`xblockchain-cli`:
+`xchain`:
 
 ```
-xblockchain-cli debug generate-xprv key.xprv
-xblockchain-cli debug xprv-to-xpub key.xprv key.xpub
+xchain generate-keys
+signing_key: 90167eccc5db6ab75c643e33901ec727be847aa51f16890df06ec6fa401e9958
+public_key: 77d0edad4553bbb66115ce1ed78ca0e752534a0d2faa707d4356ea567a586475
 ```
+
+`singing_key` is your private key you can put it in key.xprv file,
+note that there should be no EOL in that file. If you expect your
+node to be a leader, put your public_key in the `genesis.yaml` leader.
 
 Then you should start node using:
 
@@ -155,3 +168,4 @@ xchain start --genesis-config genesis.yaml \
   --config example.config \
   --secret key.xprv
 ```
+
