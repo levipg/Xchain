@@ -8,4 +8,6 @@ members = [
   "xchain-integration-tests",
 ]
 
-exclude = [ "xblockchain-deps" ]
+exclude = [
+    "chain-deps",
+]

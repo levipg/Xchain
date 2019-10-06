@@ -1,3 +1,3 @@
-[submodule "xblockchain-deps"]
-	path = xblockchain-deps
-	url = https://github.com/youtubaijia/rust-xblockchain
+[submodule "chain-deps"]
+	path = chain-deps
+	url = https://github.com/youtubaijia/chain-libs
