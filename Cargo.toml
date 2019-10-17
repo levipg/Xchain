@@ -9,6 +9,5 @@ members = [
 ]
 
 exclude = [
-    "xblockchain-deps",
     "chain-deps",
 ]
