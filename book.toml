@@ -5,6 +5,7 @@ src = "doc"
 title = "Xchain"
 
 [output.html]
+mathjax-support = true
 
 [output.linkcheck]
 # Should we check links on the internet? Enabling this option adds a
