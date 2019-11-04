@@ -9,7 +9,7 @@ User guide documentation available [here](https://youtubaijia.github.io/xchain)
 Currently the minimum supported version of the rust compiler is 1.35, however
 we recommend to use the most recent stable version of the rust compiler.
 
-1. [Install rustup](https://www.rust-lang.org/tools/install)
+1. [install rustup](https://www.rust-lang.org/tools/install)
 2. Run `rustup install stable`
 3. Run `rustup default stable`
 4. Clone this repository: `git clone --recurse-submodules https://github.com/youtubaijia/xchain`
@@ -19,35 +19,14 @@ we recommend to use the most recent stable version of the rust compiler.
 
 Note:
 
-* On Windows, you'll need to add the `%USERPROFILE%\.cargo\bin` into the
-  environment variable `PATH`.
-* On Linux and macOS: add `${HOME}/.cargo/bin` into your `PATH`.
-* Make sure the C compiler toolchain is installed and, on Unix (e.g. macOS),
-  the compiler and linker executable `cc` is found in `PATH`.
-* On Linux with systemd: to enable logging to journald replace step 6
-  with `cargo install --path . --features systemd`.
-* The build requires the [Protocol Buffers][protobuf] compiler:
-  - On Linux environments without glibc such as Alpine, the protobuf compiler
-    `protoc` needs to be installed and found in `PATH` or otherwise
-    specified in the environment variable `PROTOC`.
-  - NixOS users should rely on [shell.nix](shell.nix) provided in this source
-    tree to pull the dependencies and set up the environment for the build.
-  - For distribution or container builds in general, it's a good practice to
-    install `protoc` from the official distribution package if available,
-    otherwise the version bundled with crate `prost-build` will be used.
-
-[protobuf]: https://developers.google.com/protocol-buffers/
+* on windows, you'll need to add the `/userProfile/.cargo/bin` into the Path;
+* on linux and OSX: add `${HOME}/.cargo/bin` to your `${PATH}`
+* on linux with systemd: to enable logging to journald replace step 5. with `cargo install --path . --features systemd`
 
 This will install 2 tools:
 
 * `xchain`: the node part of the blockchain;
 * `jcli`: a command line helper tool to help you use and setup the node;
-
-## How to install from binaries
-
-Our binaries releases are available [here](https://github.com/youtubaijia/xchain/releases)
-for many operating systems and architecture, but in due time, xchain will
-be available through package managers.
 
 ## How To Use
 
@@ -63,47 +42,14 @@ automatically fetched from the network.
 More documentation on the node configuration can be found [here](https://youtubaijia.github.io/xchain/configuration/introduction.html),
 and for the blockchain genesis configuration [here](https://youtubaijia.github.io/xchain/advanced/introduction.html)
 
-## Quick-Start for private mode
+### Starting the node
 
-Follow instructions on installation, then to start a private and minimal
-test setup:
+If you are not a leader node, then you can start the jormundandr with:
 
-1. In terminal, create an empty directory somewhere and enter this directory
-2. `PATH/TO/SOURCE/REPOSITORY/scripts/bootstrap <options>`
-3. execute the instruction to start printed at the end
-
-For a BFT setup, use the following recommended options:
-
-    bootstrap -b
-
-For a Genesis-praos setup, use the following recommended options:
-
-    bootstrap -g -s 2
-
-For help on the options:
-
-    bootstrap -h
-
-The bootstrap script creates a simple setup with a faucet with 10 millions
-coins, a BFT leader, and a stake pool.
-
-The bootstrap script also create 2 shell scripts parametrized to this specific
-run of bootstrap:
-
-* `faucet-send-money`
-* `faucet-send-certificate`
-
-Both scripts can be used to do simple limited operation through the jcli debugging tools.
-
-## Quick-Start in public mode
-
-:warning: This is not currently functional :warning:
-
-To start a new node from scratch on a given blockchain, you need to know the
-block0 hash of this blockchain for trust purpose and internet peers to connect
-to. The simplest way to start such a node is:
-
-    xchain --block0-hash <HASH> --trusted-peers <IPs>
+```sh
+xchain --genesis-block block-0.bin \
+  --config example.config
+```
 
 # Documentation
 
