@@ -82,8 +82,12 @@ Running the command above will generate (WARNING: this is temporary, the genesis
 
 ```yaml
 ---
-start_time: 1550822014
-slot_duration: 15
+start_time:
+  secs_since_epoch: 1550822014
+  nanos_since_epoch: 930587000
+slot_duration:
+  secs: 15
+  nanos: 0
 epoch_stability_depth: 2600
 initial_utxos:
   - address: ca1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9ccrydpk8qarc0jqxuzx4s
@@ -97,10 +101,10 @@ obft_leaders:
 You store this in a genesis.yaml file, you can the modify/tune your genesis data.
 
 Configuration fields meaning:
-  - *start_time*: when the blockchain starts (seconds since epoch).
-  - *slot_duration*: amount of time each slot is running (seconds).
+  - *start_time*: when the blockchain starts
+  - *slot_duration*: amount of time each slot is running.
   - *epoch_stability_depth*: allowed size of the fork (in blocks).
-  - *initial_utuxos*: list of initial unspent outputs.
+  - *initial_utuxos*:
 
 ### Node Configuration
 
