@@ -82,12 +82,8 @@ Running the command above will generate (WARNING: this is temporary, the genesis
 
 ```yaml
 ---
-start_time:
-  secs_since_epoch: 1550822014
-  nanos_since_epoch: 930587000
-slot_duration:
-  secs: 15
-  nanos: 0
+start_time: 1550822014
+slot_duration: 15
 epoch_stability_depth: 2600
 initial_utxos:
   - address: ca1qvqsyqcyq5rqwzqfpg9scrgwpugpzysnzs23v9ccrydpk8qarc0jqxuzx4s
@@ -101,10 +97,10 @@ obft_leaders:
 You store this in a genesis.yaml file, you can the modify/tune your genesis data.
 
 Configuration fields meaning:
-  - *start_time*: when the blockchain starts
-  - *slot_duration*: amount of time each slot is running.
+  - *start_time*: when the blockchain starts (seconds since epoch).
+  - *slot_duration*: amount of time each slot is running (seconds).
   - *epoch_stability_depth*: allowed size of the fork (in blocks).
-  - *initial_utuxos*:
+  - *initial_utuxos*: list of initial unspent outputs.
 
 ### Node Configuration
 
@@ -169,3 +165,13 @@ xchain start --genesis-config genesis.yaml \
   --secret key.xprv
 ```
 
+# License
+
+This project is licensed under either of the following licenses:
+
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+   http://www.apache.org/licenses/LICENSE-2.0)
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or
+   http://opensource.org/licenses/MIT)
+
+Please choose the licence you want to use.
