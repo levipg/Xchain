@@ -52,7 +52,7 @@ xblockchain         = { path = "xblockchain-deps/xblockchain" }
 protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
 exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
-poldercast = "^0.1.2"
+poldercast = "^0.1.1"
 storage-units   = { path = "xblockchain-deps/storage-units" }
 tower-service = { git = "https://github.com/tower-rs/tower" }
 
