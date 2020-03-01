@@ -12,12 +12,10 @@ we recommend to use the most recent stable version of the rust compiler.
 1. [install rustup](https://www.rust-lang.org/tools/install)
 2. Run `rustup install stable`
 3. Run `rustup default stable`
-4. Make sure the C compiler toolchain is installed and, on Unix (e.g. macOS),
-  the compiler and linker executable `cc` is in `PATH`.
-5. Clone this repository: `git clone --recurse-submodules https://github.com/youtubaijia/xchain`
-6. Enter the repository directory: `cd xchain`
-7. install **xchain**: `cargo install --path xchain`
-8. install **jcli**: `cargo install --path jcli`
+4. Clone this repository: `git clone --recurse-submodules https://github.com/youtubaijia/xchain`
+5. Enter the repository directory: `cd xchain`
+6. install **xchain**: `cargo install --path xchain`
+7. install **jcli**: `cargo install --path jcli`
 
 Note:
 
