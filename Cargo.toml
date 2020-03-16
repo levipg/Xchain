@@ -46,6 +46,7 @@ chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
 chain-addr      = { path = "xblockchain-deps/chain-addr" }
+chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
 network-grpc    = { path = "xblockchain-deps/network-grpc" }
 xblockchain         = { path = "xblockchain-deps/xblockchain" }
@@ -54,7 +55,10 @@ exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
 poldercast = "0.2.0"
 storage-units   = { path = "xblockchain-deps/storage-units" }
-tower-service = { git = "https://github.com/tower-rs/tower" }
+tower-service = "0.2"
+
+[patch."https://github.com/tower-rs/tower"]
+tower-service = "0.2"
 
 [dependencies.actix-web]
 version = "0.7.18"
