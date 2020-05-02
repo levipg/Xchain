@@ -31,7 +31,6 @@ bincode = "1.0.1"
 cbor_event = "2.1.2"
 cryptoxide = "0.1"
 futures    = "0.1"
-http = "0.1.16"
 tokio      = "0.1"
 tokio-bus = "0.1"
 structopt = "^0.2"
@@ -43,21 +42,17 @@ bytes = "0.4"
 lazy_static = "1.2.0"
 actix-net = "0.2.6"
 native-tls = "0.2.2"
-regex = "1.1.2"
-hex = "0.3.2"
 chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
-chain-storage-sqlite = { path = "xblockchain-deps/chain-storage-sqlite" }
 chain-addr      = { path = "xblockchain-deps/chain-addr" }
-chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
 network-grpc    = { path = "xblockchain-deps/network-grpc" }
 xblockchain         = { path = "xblockchain-deps/xblockchain" }
 protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
 exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
-poldercast = "0.2.1"
+poldercast = "0.2.0"
 storage-units   = { path = "xblockchain-deps/storage-units" }
 tower-service = "0.2"
 
