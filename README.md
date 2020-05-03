@@ -9,7 +9,7 @@ User guide documentation available [here](https://youtubaijia.github.io/xchain)
 Currently the minimum supported version of the rust compiler is 1.35, however
 we recommend to use the most recent stable version of the rust compiler.
 
-1. [Install rustup](https://www.rust-lang.org/tools/install)
+1. [install rustup](https://www.rust-lang.org/tools/install)
 2. Run `rustup install stable`
 3. Run `rustup default stable`
 4. Clone this repository: `git clone --recurse-submodules https://github.com/youtubaijia/xchain`
@@ -19,19 +19,9 @@ we recommend to use the most recent stable version of the rust compiler.
 
 Note:
 
-* On Windows, you'll need to add the `%USERPROFILE%\.cargo\bin` into the
-  environment variable `PATH`.
-* On Linux and macOS: add `${HOME}/.cargo/bin` into your `PATH`.
-* Make sure the C compiler toolchain is installed and, on Unix (e.g. macOS),
-  the compiler and linker executable `cc` is found in `PATH`.
-* On Linux with systemd: to enable logging to journald replace step 6
-  with `cargo install --path . --features systemd`.
-* On Linux environments without glibc, such as NixOS or Alpine, the protobuf
-  compiler `protoc` needs to be installed and found in `PATH` or otherwise
-  specified in the environment variable `PROTOC`. For distribution or container
-  builds in general, it's a good practice to install protoc from the
-  official distribution package if available, otherwise the version bundled
-  with crate `prost-build` will be used.
+* on windows, you'll need to add the `/userProfile/.cargo/bin` into the Path;
+* on linux and OSX: add `${HOME}/.cargo/bin` to your `${PATH}`
+* on linux with systemd: to enable logging to journald replace step 5. with `cargo install --path . --features systemd`
 
 This will install 2 tools:
 
