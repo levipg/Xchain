@@ -43,6 +43,7 @@ lazy_static = "1.2.0"
 actix-net = "0.2.6"
 native-tls = "0.2.2"
 regex = "1.1.2"
+hex = "0.3.2"
 chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
@@ -54,7 +55,7 @@ xblockchain         = { path = "xblockchain-deps/xblockchain" }
 protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
 exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
-poldercast = "0.2.0"
+poldercast = "0.2.1"
 storage-units   = { path = "xblockchain-deps/storage-units" }
 tower-service = "0.2"
 
