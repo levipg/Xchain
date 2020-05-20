@@ -42,7 +42,6 @@ bytes = "0.4"
 lazy_static = "1.2.0"
 actix-net = "0.2.6"
 native-tls = "0.2.2"
-regex = "1.1.2"
 chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
