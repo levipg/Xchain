@@ -47,19 +47,6 @@ General tasks:
 
 ![Internal Architecture](/.architecture-1.png?raw=true "Internal Architecture")
 
-## How to install from sources
-
-We do support multiple versions of the rust compiler, however we recommend
-to utilise the most recent stable version of the rust compiler.
-
-1. [install rustup](https://www.rust-lang.org/tools/install)
-2. make sure you have cloned the submodule too: `git submodule update`
-3. install: `cargo install`
-
-Note:
-
-* on windows, you'll need to add the `/userProfile/.cargo/bin` into the Path;
-* on linux and OSX: add `${HOME}/.cargo/bin` to your `${PATH}`
 
 ## How To Use
 
@@ -175,15 +162,13 @@ In order to start a leader node you need to generate key pairs using
 `xchain`:
 
 ```
-$ xchain generate-priv-key --type Ed25519Extended
-ed25519extended_secret1vzpkw6lqk5sfaa0rtp64s28s7zcegpwqte0psqneum5w9mcgafd0gwexmfn7s96lqja5sv520zx6hx5hd0qsgahp3ta8grrrxkd8n0cjmaqre
-
-$ echo ed25519extended_secret1vzpkw6lqk5sfaa0rtp64s28s7zcegpwqte0psqneum5w9mcgafd0gwexmfn7s96lqja5sv520zx6hx5hd0qsgahp3ta8grrrxkd8n0cjmaqre \
-  | cargo run -- generate-pub-key
-ed25519extended_public13talprd9grgaqzs42mkm0x2xek5wf9mdf0eefdy8a6dk5grka2gstrp3en
+xchain generate-keys
+signing_key: 90167eccc5db6ab75c643e33901ec727be847aa51f16890df06ec6fa401e9958
+public_key: 77d0edad4553bbb66115ce1ed78ca0e752534a0d2faa707d4356ea567a586475
 ```
 
-This is your private key you can put it in key.xprv file. If you expect your
+`singing_key` is your private key you can put it in key.xprv file,
+note that there should be no EOL in that file. If you expect your
 node to be a leader, put your public_key in the `genesis.yaml` leader.
 
 Then you should start node using:
@@ -192,41 +177,6 @@ Then you should start node using:
 xchain start --genesis-config genesis.yaml \
   --config example.config \
   --secret key.xprv
-```
-
-### Node client
-
-Xchain comes with a CLI client for manual communication with nodes over HTTP.
-
-#### Building
-
-```
-cargo build --bin sender
-```
-
-#### Convention
-
-Many CLI commands have common arguments:
-
-- `-h <addr>` or `--host <addr>` - Node API address. Must always have `http://` or
-`https://` prefix. E.g. `-h http://127.0.0.1`, `--host https://node.com:8443/xblockchain/api`
-
-#### Node stats
-
-Fetches node stats
-
-```
-sender v0 node stats get -h <node_addr>
-```
-
-JSON printed on success
-
-```
-{
-  "blockRecvCnt": 7,  // Blocks received by node  
-  "txRecvCnt": 90,    // Transactions received by node
-  "uptime": 2101      // Node uptitme in seconds
-}
 ```
 
 # License
