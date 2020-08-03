@@ -36,7 +36,6 @@ http = "0.1.16"
 tokio      = "0.1"
 tokio-bus = "0.1"
 structopt = "^0.2"
-curve25519-dalek = "0.21"
 sha2 = "^0.7"
 digest = "^0.7"
 generic-array = "^0.9"
@@ -49,6 +48,7 @@ bech32 = "0.6"
 chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
+chain-storage-sqlite = { path = "xblockchain-deps/chain-storage-sqlite" }
 chain-addr      = { path = "xblockchain-deps/chain-addr" }
 chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
@@ -60,6 +60,7 @@ xblockchain-storage = { path = "xblockchain-deps/storage" }
 poldercast = "0.2.1"
 storage-units   = { path = "xblockchain-deps/storage-units" }
 tower-service = "0.2"
+reqwest = "0.9.11"
 
 [patch."https://github.com/tower-rs/tower"]
 tower-service = "0.2"
