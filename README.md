@@ -152,6 +152,7 @@ xchain start --genesis-config genesis.yaml \
 # documentations
 
 * [internal design](./doc/internal_design.md) of xchain
+* [cryptographic keys](./doc/xchain_keys.md)
 
 # Extra tooling
 
