@@ -47,9 +47,9 @@ peer_2_peer:
 
 Fields description:
 
+  - *bft.constants.t*: (to be removed)
   - *bft.leaders*: public keys of the nodes.
-  - *storage*: (optional) path to the storage. If omitted, the
-    blockchain is stored in memory only.
+  - *storage*: (optional) path to the storage
   - *logger*: (optional) logger configuration,
      - *verbosity*: 0 - warning, 1 - info, 2 -debug, 3 and above - trace
      - *format*: log output format - plain or json.
@@ -84,6 +84,7 @@ xchain start --genesis-config genesis.yaml \
 
 * [internal design](./doc/internal_design.md) of xchain
 * [cryptographic keys](./doc/xchain_keys.md)
+* [The genesis file](./doc/genesis_file.md)
 * [Starting a BFT Blockchain](./doc/starting_bft_blockchain.md)
 * [Starting a Generis Praos Blockchain](#) (**under construction**)
 

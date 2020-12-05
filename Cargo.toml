@@ -48,7 +48,6 @@ bech32 = "0.6"
 chain-core      = { path = "xblockchain-deps/chain-core" }
 chain-impl-mockchain = { path = "xblockchain-deps/chain-impl-mockchain", features = [ "generic-serialization" ] }
 chain-storage   = { path = "xblockchain-deps/chain-storage" }
-chain-storage-sqlite = { path = "xblockchain-deps/chain-storage-sqlite" }
 chain-addr      = { path = "xblockchain-deps/chain-addr" }
 chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
