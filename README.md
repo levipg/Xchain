@@ -91,7 +91,6 @@ xchain start --genesis-config genesis.yaml \
 # Extra tooling
 
 * [CLI sender](./doc/cli_sender.md) for HTTP management
-* [CLI transaction builder](./doc/cli_tx_builder.md) for HTTP management
 * [CLI address](./doc/cli_address.md) for debugging addresses
 
 # License
