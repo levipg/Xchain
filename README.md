@@ -90,19 +90,8 @@ xchain start --genesis-config genesis.yaml \
 
 # Extra tooling
 
-## CLI
-
-Building:
-
-```
-cargo build --bin xchain_cli
-```
-
-The binary has subcommands
-
-* [rest](./doc/cli_rest.md) for REST API calls
-* [transaction](./doc/cli_transaction.md) for offline transaction management
-* [address](./doc/cli_address.md) for debugging addresses
+* [CLI sender](./doc/cli_sender.md) for HTTP management
+* [CLI address](./doc/cli_address.md) for debugging addresses
 
 # License
 
