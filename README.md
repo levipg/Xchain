@@ -4,6 +4,14 @@
 
 User guide documentation available [here](https://youtubaijia.github.io/xchain)
 
+## Master current build status
+
+| CI | Status | Description |
+|---:|:------:|:------------|
+| Travis CI | [![Build Status](https://travis-ci.org/youtubaijia/xchain.svg?branch=master)](https://travis-ci.org/youtubaijia/xchain) | Master and release |
+| CircleCI | [![CircleCI](https://circleci.com/gh/youtubaijia/xchain/tree/master.svg?style=svg)](https://circleci.com/gh/youtubaijia/xchain/tree/master) | Master and PRs |
+| Appveyor | [![Build status](https://ci.appveyor.com/api/projects/status/1y5583gqc4xn8x3j/branch/master?svg=true)](https://ci.appveyor.com/project/NicolasDP/xchain/branch/master) | Master, release and PRs |
+
 ## How to install from sources
 
 Currently the minimum supported version of the rust compiler is 1.35, however
