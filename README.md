@@ -16,6 +16,11 @@ Note:
 * on windows, you'll need to add the `/userProfile/.cargo/bin` into the Path;
 * on linux and OSX: add `${HOME}/.cargo/bin` to your `${PATH}`
 
+This will install 2 tools:
+
+* `xchain`: the xblockchain node;
+* `jcli`: a command line tool to help you use and setup the xblockchain node;
+
 ## How To Use
 
 In order to use xchain you need to configure your blockchain and
@@ -75,7 +80,7 @@ Fields description:
 If you are not a leader node, then you can start the jormundandr with:
 
 ```
-xchain start --genesis-config genesis.yaml \
+xchain start --genesis-block block-0.bin \
   --config example.config \
   --without-leadership
 ```
@@ -95,7 +100,7 @@ xchain start --genesis-config genesis.yaml \
 Building:
 
 ```
-cargo build --bin xchain_cli
+cargo build --bin jcli
 ```
 
 The binary has subcommands
