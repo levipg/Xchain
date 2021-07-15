@@ -95,7 +95,7 @@ xchain start --genesis-config genesis.yaml \
 Building:
 
 ```
-cargo build --bin jcli
+cargo build --bin xchain_cli
 ```
 
 The binary has subcommands
