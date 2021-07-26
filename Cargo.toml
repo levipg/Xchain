@@ -54,11 +54,8 @@ chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
 network-grpc    = { path = "xblockchain-deps/network-grpc" }
 xblockchain         = { path = "xblockchain-deps/xblockchain" }
-protocol-tokio  = { path = "xblockchain-deps/protocol-tokio" }
-exe-common      = { path = "xblockchain-deps/exe-common" }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
 poldercast = "0.2.1"
-storage-units   = { path = "xblockchain-deps/storage-units" }
 tower-service = "0.2"
 reqwest = "0.9.11"
 
