@@ -53,7 +53,7 @@ chain-addr      = { path = "xblockchain-deps/chain-addr" }
 chain-crypto    = { path = "xblockchain-deps/chain-crypto" }
 network-core    = { path = "xblockchain-deps/network-core" }
 network-grpc    = { path = "xblockchain-deps/network-grpc" }
-xblockchain         = { path = "xblockchain-deps/xblockchain" }
+xblockchain         = { path = "xblockchain-deps/xblockchain", features = [ "generic-serialization" ] }
 xblockchain-storage = { path = "xblockchain-deps/storage" }
 poldercast = "0.2.1"
 tower-service = "0.2"
