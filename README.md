@@ -88,8 +88,6 @@ xchain --genesis-block block-0.bin \
 # documentations
 
 * [internal design](./doc/internal_design.md) of xchain
-* [cryptographic keys](./doc/xchain_keys.md)
-* [The genesis file](./doc/genesis_file.md)
 * [Starting a BFT Blockchain](./doc/starting_bft_blockchain.md)
 * [Starting a Generis Praos Blockchain](#) (**under construction**)
 
@@ -105,6 +103,8 @@ cargo build --bin jcli
 
 The binary has subcommands
 
+* [cryptographic keys](./doc/xchain_keys.md)
+* [The genesis file](./doc/genesis_file.md)
 * [rest](./doc/cli_rest.md) for REST API calls
 * [transaction](./doc/cli_transaction.md) for offline transaction management
 * [address](./doc/cli_address.md) for debugging addresses

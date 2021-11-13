@@ -58,12 +58,15 @@ xblockchain-storage = { path = "xblockchain-deps/storage" }
 poldercast = "0.2.1"
 tower-service = "0.2"
 reqwest = "0.9.11"
+custom_error = "1.6"
+num-traits = "0.2"
 
 [patch."https://github.com/tower-rs/tower"]
 tower-service = "0.2"
 
 [dependencies.actix-web]
 version = "0.7.18"
+default-features = false
 features = [ "tls" ]
 
 [dependencies.clap]
