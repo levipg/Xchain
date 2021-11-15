@@ -1,6 +1,5 @@
 [workspace]
 members = [
-  "hex",
   "xchain-lib",
   "xchain",
   "jcli",
