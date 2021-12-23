@@ -34,7 +34,6 @@ cryptoxide = "0.1"
 futures    = "0.1"
 http = "0.1.16"
 tokio      = "0.1"
-tokio-bus = "0.1"
 structopt = "^0.2"
 sha2 = "^0.7"
 digest = "^0.7"
@@ -59,12 +58,14 @@ poldercast = "0.2.1"
 tower-service = "0.2"
 reqwest = "0.9.11"
 custom_error = "1.6"
+num-traits = "0.2"
 
 [patch."https://github.com/tower-rs/tower"]
 tower-service = "0.2"
 
 [dependencies.actix-web]
 version = "0.7.18"
+default-features = false
 features = [ "tls" ]
 
 [dependencies.clap]
